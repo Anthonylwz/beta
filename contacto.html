@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto - Matrixx Electronics</title>
+  <meta
+    name="description"
+    content="Contacta con Matrixx Electronics. Soporte técnico, ventas, instalación de cámaras y servicios profesionales en Perú."
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    /* Estilos específicos para la página de contacto */
+    .contact-page {
+      padding: 60px 0;
+      background-color: var(--light-bg);
+    }
+    
+    .contact-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    
+    .contact-header h1 {
+      font-size: 2.5rem;
+      color: var(--dark-color);
+      margin-bottom: 15px;
+    }
+    
+    .contact-header p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--light-text-color);
+      font-size: 1.1rem;
+    }
+    
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .contact-form {
+      background: var(--white-color);
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow-light);
+    }
+    
+    .contact-form h2 {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      color: var(--dark-color);
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .contact-form h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--primary-color);
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      transition: border-color var(--transition-speed) ease;
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.15);
+    }
+    
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      background-color: var(--primary-color);
+      color: var(--white-color);
+      border: none;
+      padding: 14px 30px;
+      border-radius: var(--border-radius);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color var(--transition-speed) ease;
+      width: 100%;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .submit-btn:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    .contact-info {
+      background: var(--white-color);
+      padding: 40px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow-light);
+    }
+    
+    .contact-info h2 {
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      color: var(--dark-color);
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .contact-info h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--primary-color);
+    }
+    
+    .info-item {
+      display: flex;
+      margin-bottom: 25px;
+      align-items: flex-start;
+    }
+    
+    .info-icon {
+      background: rgba(var(--primary-color-rgb), 0.1);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      flex-shrink: 0;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+    
+    .info-content h3 {
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+      color: var(--dark-color);
+    }
+    
+    .info-content p, 
+    .info-content a {
+      color: var(--light-text-color);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+    
+    .info-content a:hover {
+      color: var(--primary-color);
+    }
+    
+    .business-hours {
+      margin-top: 30px;
+      padding-top: 25px;
+      border-top: 1px solid var(--border-color);
+    }
+    
+    .hours-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    
+    .hours-item span:first-child {
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+    
+    .hours-item span:last-child {
+      color: var(--light-text-color);
+    }
+    
+    /* Mapa */
+    .contact-map {
+      grid-column: 1 / -1;
+      height: 400px;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow-light);
+      background: var(--dark-color);
+    }
+    
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+    
+    /* FAQ Section */
+    .faq-section {
+      grid-column: 1 / -1;
+      margin-top: 50px;
+    }
+    
+    .faq-section h2 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--dark-color);
+    }
+    
+    .faq-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .faq-item {
+      background: var(--white-color);
+      border-radius: var(--border-radius);
+      margin-bottom: 15px;
+      box-shadow: var(--box-shadow-light);
+      overflow: hidden;
+    }
+    
+    .faq-question {
+      padding: 20px 60px 20px 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      color: var(--dark-color);
+      transition: background-color var(--transition-speed) ease;
+    }
+    
+    .faq-question:hover {
+      background-color: var(--light-bg);
+    }
+    
+    .faq-question::after {
+      content: '\f107';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 25px;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: transform var(--transition-speed) ease;
+    }
+    
+    .faq-item.active .faq-question::after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+    
+    .faq-answer {
+      padding: 0 25px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height var(--transition-speed) ease, padding var(--transition-speed) ease;
+      color: var(--light-text-color);
+      line-height: 1.6;
+    }
+    
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding: 0 25px 25px;
+    }
+    
+    /* WhatsApp contact buttons */
+    .whatsapp-contact {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 1000;
+    }
+    
+    .whatsapp-btn {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background-color: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white-color);
+      font-size: 26px;
+      box-shadow: var(--box-shadow-medium);
+      transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+    }
+    
+    .whatsapp-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+      text-decoration: none;
+    }
+    
+    /* Responsive */
+    @media screen and (max-width: 768px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-form,
+      .contact-info {
+        padding: 25px;
+      }
+      
+      .contact-map {
+        height: 300px;
+      }
+      
+      .whatsapp-contact {
+        bottom: 15px;
+        right: 15px;
+      }
+      
+      .whatsapp-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="global-loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <div id="notification-container"></div>
+
+  <!-- Botones flotantes de WhatsApp -->
+  <div class="whatsapp-contact">
+    <a
+      href="https://wa.me/51948080280?text=Hola%2C%20necesito%20ayuda%20con%20un%20producto."
+      target="_blank"
+      class="whatsapp-btn"
+      aria-label="Contactar por WhatsApp Principal"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a
+      href="https://wa.me/51975745025?text=Hola%2C%20quisiera%20consultar%20sobre%20soporte."
+      target="_blank"
+      class="whatsapp-btn"
+      aria-label="Contactar por WhatsApp para Soporte"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+    <a
+      href="https://wa.me/51928232027?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20ventas."
+      target="_blank"
+      class="whatsapp-btn"
+      aria-label="Contactar por WhatsApp para Ventas"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </div>
+
+  <header class="main-header">
+    <a href="index.html" class="logo">
+      <img
+        src="imagenes/logo.png"
+        alt="Matrixx Electronics Logo"
+        style="height: 40px; margin-right: 10px; vertical-align: middle;"
+      />
+      <span style="vertical-align: middle;">Matrixx Electronics</span>
+    </a>
+
+    <div class="search-wrapper">
+      <form class="search-container" role="search" id="searchForm" autocomplete="off">
+        <label for="searchCategoryHeader" class="visually-hidden">Categoría</label>
+        <select id="searchCategoryHeader" name="categoria">
+          <option value="all">Todas</option>
+          <option value="laptops">Laptops</option>
+          <option value="computadoras">Computadoras</option>
+          <option value="celulares">Celulares</option>
+          <option value="camaras">Cámaras</option>
+          <option value="accesorios">Accesorios</option>
+          <option value="gamer">Gamer</option>
+          <option value="servicios">Servicios</option>
+        </select>
+        <label for="searchInputHeader" class="visually-hidden">Buscar</label>
+        <input
+          type="search"
+          id="searchInputHeader"
+          name="q"
+          placeholder="Buscar productos, marcas y más..."
+        />
+        <button type="submit" class="search-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
+      </form>
+      <div id="search-suggestions" class="search-suggestions-container"></div>
+    </div>
+
+    <div class="header-actions">
+      <div class="cart-icon-wrapper">
+        <button
+          class="action-btn cart-btn"
+          id="cart-icon-btn"
+          aria-label="Carrito de compras"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="cartDropdown"
+        >
+          <i class="fas fa-shopping-cart"></i><span class="cart-count">0</span>
+        </button>
+        <div class="cart-dropdown" id="cartDropdown" aria-labelledby="cart-heading">
+          <h3 id="cart-heading" class="cart-header">
+            Mi Carrito (<span class="cart-count">0</span>)
+          </h3>
+          <div class="cart-items" id="cartItemsContainer">
+            <p class="empty-cart-message">Tu carrito está vacío.</p>
+          </div>
+          <div class="cart-footer">
+            <div class="cart-total">
+              <span>Total:</span> <span id="cartTotal">S/0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" disabled>
+              PROCEDER AL PAGO
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="main-nav" aria-label="Categorías principales">
+    <div class="container">
+      <ul class="main-menu" role="menubar">
+        <li role="none"><a role="menuitem" href="index.html">Inicio</a></li>
+        <li role="none" class="has-submenu">
+          <a
+            role="menuitem"
+            href="/productos"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >Productos</a
+          >
+          <ul class="submenu" role="menu">
+            <li role="none"><a role="menuitem" href="laptop.html">Laptop</a></li>
+            <li role="none"><a role="menuitem" href="computadoras.html">Computadora</a></li>
+            <li role="none"><a role="menuitem" href="cam.html">Celular</a></li> 
+            <li role="none">
+              <a role="menuitem" href="cam.html">Cámaras de Seguridad</a> 
+            </li>
+            <li role="none"><a role="menuitem" href="accesorios.html">Accesorios</a></li>
+            <li role="none"><a role="menuitem" href="/productos?categoria=gamer">Gamer</a></li>
+          </ul>
+        </li>
+        <li role="none" class="has-submenu">
+          <a
+            role="menuitem"
+            href="/servicios"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >Servicios</a
+          >
+          <ul class="submenu" role="menu">
+            <li role="none">
+              <a role="menuitem" href="/servicios?tipo=tecnico">Servicio Técnico</a>
+            </li>
+            <li role="none">
+              <a role="menuitem" href="/servicios?tipo=instalacion-camaras"
+                >Instalación de Cámaras</a
+              >
+            </li>
+            <li role="none">
+              <a role="menuitem" href="/servicios?tipo=instalacion-redes"
+                >Instalación de Redes</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li role="none"><a role="menuitem" href="#ofertas">Ofertas</a></li>
+        <li role="none"><a role="menuitem" href="contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="contact-page">
+    <div class="contact-header">
+      <h1>Contáctanos</h1>
+      <p>¿Tienes alguna pregunta, comentario o necesitas soporte técnico? Estamos aquí para ayudarte. Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+    </div>
+    
+    <div class="contact-container">
+      <div class="contact-form">
+        <h2>Envíanos un mensaje</h2>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">Nombre completo *</label>
+            <input type="text" id="name" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Correo electrónico *</label>
+            <input type="email" id="email" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" class="form-control">
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Asunto *</label>
+            <select id="subject" class="form-control" required>
+              <option value="" disabled selected>Selecciona un asunto</option>
+              <option value="consulta">Consulta general</option>
+              <option value="soporte">Soporte técnico</option>
+              <option value="ventas">Ventas y cotizaciones</option>
+              <option value="instalacion">Instalación de cámaras</option>
+              <option value="servicio">Servicio técnico</option>
+              <option value="otros">Otros</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Mensaje *</label>
+            <textarea id="message" class="form-control" required></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">Enviar mensaje</button>
+        </form>
+      </div>
+      
+      <div class="contact-info">
+        <h2>Información de contacto</h2>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="info-content">
+            <h3>Dirección</h3>
+            <p>281 Av. Giráldez</p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="info-content">
+            <h3>Teléfono</h3>
+            <p><a href="tel:+5114567890">+51 948 080 280</a></p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="info-content">
+            <h3>Correo electrónico</h3>
+            <p><a href="mailto:ventas@matrix.com.pe">Matrix@gmail.com</a></p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div class="info-content">
+            <h3>WhatsApp</h3>
+            <p><a href="https://wa.me/51912345678">+51 948 080 280</a> (Ventas)</p>
+            <p><a href="https://wa.me/51987654321">+51 943 523 541</a> (Soporte)</p>
+          </div>
+        </div>
+        
+        <div class="business-hours">
+          <h3>Horario de atención</h3>
+          <div class="hours-item">
+            <span>Lunes a Viernes:</span>
+            <span>10:00 AM - 8:00 PM</span>
+          </div>
+          <div class="hours-item">
+            <span>Sábados:</span>
+            <span>10:00 AM - 8:00 PM</span>
+          </div>
+          <div class="hours-item">
+            <span>Domingos:</span>
+            <span>Cerrado</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!4v1749184102059!6m8!1m7!1sgoQlLRj5LhSewSAKz7-b-Q!2m2!1d-12.06755777257254!2d-75.2081595724306!3f338.4976124134909!4f-9.388861229943117!5f0.7820865974627469" width="1600" height="450" style="border: 0px;;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      
+      <div class="faq-section">
+        <h2>Preguntas Frecuentes</h2>
+        <div class="faq-container">
+          <div class="faq-item">
+            <div class="faq-question">¿Cuál es el tiempo de respuesta para consultas?</div>
+            <div class="faq-answer">
+              <p>Respondemos a todas las consultas en un plazo máximo de 24 horas hábiles. Para solicitudes urgentes, te recomendamos contactarnos por WhatsApp para una respuesta más rápida.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">¿Ofrecen servicio técnico a domicilio?</div>
+            <div class="faq-answer">
+              <p>Sí, ofrecemos servicio técnico a domicilio para reparación de computadoras, laptops, instalación de cámaras de seguridad y redes. El costo del servicio varía según la ubicación y la complejidad del trabajo.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">¿Cuál es la política de garantía de los productos?</div>
+            <div class="faq-answer">
+              <p>Todos nuestros productos tienen garantía de fábrica que varía entre 6 meses y 2 años según el producto. Además, ofrecemos garantía adicional de 30 días en servicio técnico realizado por nuestros especialistas.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">¿Hacen envíos a todo el Perú?</div>
+            <div class="faq-answer">
+              <p>Sí, realizamos envíos a todo el Perú a través de las principales empresas de transporte. Los costos y tiempos de entrega varían según la ubicación y el servicio seleccionado.</p>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">¿Puedo personalizar mi computadora?</div>
+            <div class="faq-answer">
+              <p>¡Absolutamente! Ofrecemos el servicio de ensamblaje de PCs personalizadas. Puedes elegir cada componente según tus necesidades y presupuesto. Contáctanos para una cotización personalizada.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Institucional</h3>
+          <ul class="footer-menu">
+            <li><a href="/nosotros">Sobre Nosotros</a></li>
+            <li><a href="/tiendas">Nuestras Tiendas</a></li>
+            <li><a href="/trabaja-con-nosotros">Trabaja con Nosotros</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Contacto</h3>
+          <address>
+            281 Av. Giráldez<br />
+            Tel: +51 948 080 280<br />
+            Email: Matrix@gmail.com<br />
+          </address>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/people/Matrixx-Electronics/100064220821489/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/519943523541?text=Hola%2C%20desde%20la%20web." target="_blank" aria-label="Whatsapp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Matrixx Electronics. Todos los derechos reservados.
+      <a href="creado.html">creado:</a>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Inicializar el mapa
+      const map = L.map('map').setView([-12.0464, -77.0428], 15);
+      
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      
+      L.marker([-12.0464, -77.0428]).addTo(map)
+        .bindPopup('Matrixx Electronics<br>Tienda principal')
+        .openPopup();
+      
+      // Manejar el formulario de contacto
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Aquí iría la lógica para enviar el formulario
+          // Por ahora, simularemos un envío exitoso
+          alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
+          contactForm.reset();
+        });
+      }
+      
+      // Funcionalidad para las preguntas frecuentes
+      const faqQuestions = document.querySelectorAll('.faq-question');
+      faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+          const faqItem = this.parentElement;
+          faqItem.classList.toggle('active');
+        });
+      });
+      
+      // Ocultar loader
+      const loader = document.getElementById('global-loader');
+      if (loader) {
+        loader.style.opacity = '0';
+        loader.addEventListener('transitionend', () => loader.remove(), { once: true });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -28,6 +28,15 @@ class Utils {
             }, delay);
         };
     }
+
+    static shuffleArray(array) {
+        const newArray = [...array]; // Create a shallow copy to avoid modifying the original
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]]; // Swap elements
+        }
+        return newArray;
+    }
 }
 
 class ApiService {
@@ -117,13 +126,43 @@ class ApiService {
                 { id: "acc067", name: "TABLET ADVANCE NOVAPAD NP6070", category: ["tablets"], price: 499.00, images: ["imagenes/tablet-advance-novapad.jpg"], rating: 4.2, description: "Tablet Android 12 con pantalla HD 10.1\", 4GB RAM y 64GB almacenamiento.", specs: ["Pantalla: 10.1\" HD", "RAM: 4GB", "Almacenamiento: 64GB"], stock: 50, slider: "accesorios" },
                 { id: "acc068", name: "CASE CIBERMAX APICO CBX 5008R SIN FUENTE", category: ["componentes"], price: 79.90, images: ["imagenes/gabinete-cibermax.webp"], rating: 4.0, description: "Gabinete gaming con panel lateral templado y espacio para 6 ventiladores.", specs: ["Panel lateral: Templado", "Ventiladores: 6 posiciones", "RGB: Sí"], stock: 50, slider: "accesorios" },
                 { id: "acc069", name: "Monitor curvo gaming TEROS TE-2471G", category: ["monitores", "gamer"], price: 399.00, oldPrice: 419.00, images: ["imagenes/monitor-teros-gaming.webp"], rating: 4.8, description: "Monitor curvo 23.8\" FHD VA, 165Hz, 2ms, HDMI, DP - Experiencia gaming inmersiva", specs: ["Tamaño: 23.8\" Curvo 3000R", "Resolución: Full HD (1920x1080)", "Tasa de refresco: 165Hz", "Tiempo de respuesta: 2ms", "Conectores: HDMI, DisplayPort"], stock: 50, slider: "ofertas" },
-                { id: "acc073", name: "BACKPACK TEROS WORK BLACK/GREY", category: ["accesorios"], price: 99.00, images: ["imagenes/mochila-teros-work.jpeg"], rating: 4.5, description: "Mochila para notebooks hasta 15.6\" con múltiples compartimentos y diseño ergonómico.", specs: ["Capacidad: Notebooks hasta 15.6\"", "Compartimentos: 3 principales", "Bolsillos laterales para botellas", "Material: Poliéster resistente"], stock: 50, slider: "accesorios" }
+                { id: "acc073", name: "BACKPACK TEROS WORK BLACK/GREY", category: ["accesorios"], price: 99.00, images: ["imagenes/mochila-teros-work.jpeg"], rating: 4.5, description: "Mochila para notebooks hasta 15.6\" con múltiples compartimentos y diseño ergonómico.", specs: ["Capacidad: Notebooks hasta 15.6\"", "Compartimentos: 3 principales", "Bolsillos laterales para botellas", "Material: Poliéster resistente"], stock: 50, slider: "accesorios" },
+                
+                // LAPTOPS (5 productos)
+                { id: "lap001", name: "Laptop HP Pavilion 15", category: ["laptop", "computacion"], price: 2899.00, images: ["imagenes/laptop-hp-pavilion.avif"], rating: 4.5, description: "Laptop con Intel Core i7, 16GB RAM, SSD 512GB, pantalla Full HD 15.6\"", specs: ["Procesador: Intel Core i7-1165G7", "RAM: 16GB DDR4", "Almacenamiento: 512GB SSD", "Pantalla: 15.6\" FHD IPS"], stock: 15, slider: "ofertas" },
+                { id: "lap002", name: "Laptop Dell Inspiron 14", category: ["laptop"], price: 2399.00, images: ["imagenes/laptop-dell-inspiron.png"], rating: 4.3, description: "Laptop ultradelgada con AMD Ryzen 5, 8GB RAM, SSD 256GB", specs: ["Procesador: AMD Ryzen 5 5500U", "RAM: 8GB DDR4", "Almacenamiento: 256GB SSD", "Pantalla: 14\" FHD"], stock: 20, slider: "accesorios" },
+                { id: "lap003", name: "Laptop ASUS VivoBook S15", category: ["laptop"], price: 2699.00, images: ["imagenes/laptop-asus-vivobook.png"], rating: 4.6, description: "Laptop elegante con pantalla NanoEdge, Intel i5, 8GB RAM", specs: ["Procesador: Intel Core i5-1135G7", "RAM: 8GB DDR4", "SSD: 512GB PCIe", "Pantalla: 15.6\" FHD"], stock: 12, slider: "ofertas" },
+                { id: "lap004", name: "Laptop Lenovo IdeaPad 3", category: ["laptop"], price: 1899.00, oldPrice: 2099.00, images: ["imagenes/laptop-lenovo-ideapad.jpg"], rating: 4.2, description: "Laptop económica con AMD Ryzen 3, 8GB RAM, disco 1TB", specs: ["Procesador: AMD Ryzen 3 3250U", "RAM: 8GB DDR4", "Almacenamiento: 1TB HDD", "Pantalla: 15.6\" HD"], stock: 18, slider: "ofertas" },
+                { id: "lap005", name: "Laptop Acer Swift 3", category: ["laptop"], price: 2999.00, images: ["imagenes/laptop-acer-swift.jpg"], rating: 4.7, description: "Laptop premium con Intel i7, 16GB RAM, pantalla táctil Full HD", specs: ["Procesador: Intel Core i7-1165G7", "RAM: 16GB LPDDR4X", "SSD: 1TB PCIe NVMe", "Pantalla: 14\" FHD táctil"], stock: 10, slider: "accesorios" },
+
+                // COMPUTADORAS (5 productos)
+                { id: "pc001", name: "PC Gamer AMD Ryzen 5", category: ["computadora", "gamer"], price: 3499.00, images: ["imagenes/pc-gamer-ryzen5.webp"], rating: 4.8, description: "Torre gaming con Ryzen 5 5600X, RTX 3060, 16GB RAM RGB", specs: ["CPU: AMD Ryzen 5 5600X", "GPU: NVIDIA RTX 3060 12GB", "RAM: 16GB DDR4 3200MHz RGB", "Almacenamiento: 1TB SSD NVMe"], stock: 8, slider: "ofertas" },
+                { id: "pc002", name: "PC Oficina Intel Core i3", category: ["computadora"], price: 1599.00, images: ["imagenes/pc-oficina-i3.jpg"], rating: 4.1, description: "Computadora para oficina con Windows 10 Pro preinstalado", specs: ["CPU: Intel Core i3-10100", "RAM: 8GB DDR4", "Almacenamiento: 256GB SSD", "Sistema: Windows 10 Pro"], stock: 25, slider: "accesorios" },
+                { id: "pc003", name: "PC All-in-One HP", category: ["computadora"], price: 3299.00, images: ["imagenes/pc-all-in-one-hp.webp"], rating: 4.4, description: "Computadora todo en uno con pantalla Full HD 23.8\"", specs: ["Pantalla: 23.8\" FHD IPS", "CPU: Intel Core i5-1135G7", "RAM: 12GB DDR4", "Almacenamiento: 512GB SSD"], stock: 7, slider: "ofertas" },
+                { id: "pc004", name: "PC Workstation Dell", category: ["computadora"], price: 5899.00, images: ["imagenes/pc-workstation-dell.png"], rating: 4.9, description: "Estación de trabajo para diseño y renderizado profesional", specs: ["CPU: Intel Xeon W-1270", "GPU: NVIDIA Quadro RTX 4000", "RAM: 32GB ECC DDR4", "Almacenamiento: 1TB SSD + 2TB HDD"], stock: 4, slider: "accesorios" },
+                { id: "pc005", name: "Mini PC Intel NUC", category: ["computadora"], price: 1299.00, images: ["imagenes/mini-pc-nuc.jpg"], rating: 4.3, description: "Computadora miniaturizada ideal para espacios reducidos", specs: ["CPU: Intel Core i3-1115G4", "RAM: 8GB DDR4", "Almacenamiento: 256GB SSD", "Dimensiones: 117x112x51mm"], stock: 15, slider: "ofertas" },
+
+                // CELULARES (5 productos)
+                { id: "cel001", name: "Samsung Galaxy S22", category: ["celular"], price: 3899.00, images: ["imagenes/celular-samsung-s22.webp"], rating: 4.8, description: "Flagship de Samsung con cámara profesional y pantalla Dynamic AMOLED", specs: ["Pantalla: 6.1\" Dynamic AMOLED 120Hz", "Procesador: Snapdragon 8 Gen 1", "RAM: 8GB", "Almacenamiento: 128GB"], stock: 12, slider: "ofertas" },
+                { id: "cel002", name: "iPhone 13 Pro", category: ["celular"], price: 4599.00, images: ["imagenes/celular-iphone13pro.jpg"], rating: 4.9, description: "iPhone profesional con triple cámara y pantalla Super Retina XDR", specs: ["Pantalla: 6.1\" Super Retina XDR", "Chip: A15 Bionic", "RAM: 6GB", "Almacenamiento: 128GB"], stock: 9, slider: "accesorios" },
+                { id: "cel003", name: "Xiaomi Redmi Note 11", category: ["celular"], price: 999.00, images: ["imagenes/celular-redmi-note11.webp"], rating: 4.5, description: "Smartphone económico con cámara de 50MP y carga rápida 33W", specs: ["Pantalla: 6.43\" AMOLED 90Hz", "Procesador: Snapdragon 680", "RAM: 4GB", "Almacenamiento: 128GB"], stock: 30, slider: "ofertas" },
+                { id: "cel004", name: "Motorola Edge 30", category: ["celular"], price: 1999.00, images: ["imagenes/celular-motorola-edge30.jpg"], rating: 4.6, description: "Diseño premium con pantalla 144Hz y cámara de 50MP", specs: ["Pantalla: 6.5\" pOLED 144Hz", "Procesador: Snapdragon 778G+", "RAM: 8GB", "Almacenamiento: 128GB"], stock: 14, slider: "accesorios" },
+                { id: "cel005", name: "Realme 9 Pro+", category: ["celular"], price: 1499.00, images: ["imagenes/celular-realme9pro.jpg"], rating: 4.4, description: "Cámara Sony IMX766 con estabilización óptica OIS", specs: ["Pantalla: 6.4\" Super AMOLED 90Hz", "Procesador: Dimensity 920", "RAM: 8GB", "Almacenamiento: 256GB"], stock: 18, slider: "ofertas" },
+
+                // CÁMARAS (5 productos)
+                { id: "cam001", name: "Cámara Hikvision DS-2CD2043G0-I", category: ["camaras"], price: 299.00, images: ["imagenes/camara-hikvision-dome.jpg"], rating: 4.7, description: "Cámara domo exterior 4MP con visión nocturna a color", specs: ["Resolución: 4MP (2560x1440)", "Lente: 2.8mm", "Visión Nocturna: 30m", "IP67"], stock: 22, slider: "accesorios" },
+                { id: "cam002", name: "Cámara Dahua IPC-HDW3449H-AS-PV", category: ["camaras"], price: 349.00, images: ["imagenes/camara-dahua-bullet.jpg"], rating: 4.8, description: "Cámara bullet 4MP con estacionamiento inteligente", specs: ["Resolución: 4MP (2688x1520)", "Lente: 2.8mm", "WDR: 120dB", "IP67"], stock: 15, slider: "ofertas" },
+                { id: "cam003", name: "Kit 4 Cámaras Hikvision", category: ["camaras"], price: 1299.00, oldPrice: 1499.00, images: ["imagenes/kit-camaras-hikvision.jpg"], rating: 4.9, description: "Kit completo con 4 cámaras 5MP y NVR de 8 canales", specs: ["Cámaras: 4x 5MP", "NVR: 8 canales", "Almacenamiento: 1TB", "Mobile View"], stock: 8, slider: "ofertas" },
+                { id: "cam004", name: "Cámara PTZ Dahua SD49225XA-HNR", category: ["camaras"], price: 1899.00, images: ["imagenes/camara-ptz-dahua.webp"], rating: 4.6, description: "Cámara PTZ 25x zoom con seguimiento automático", specs: ["Resolución: 2MP (1080p)", "Zoom: Óptico 25x", "Visión Nocturna: 150m", "IP66"], stock: 5, slider: "accesorios" },
+                { id: "cam005", name: "Cámara Wi-Fi TP-Link Tapo C210", category: ["camaras"], price: 199.00, images: ["imagenes/camara-wifi-tp-link.jpg"], rating: 4.3, description: "Cámara WiFi interior con seguimiento automático", specs: ["Resolución: 1080p", "Ángulo: 360° horizontal", "Audio: Bidireccional", "App: Tapo"], stock: 35, slider: "ofertas" },
             ]
         };
     }
 
     async getProducts() {
-        return new Promise(resolve => setTimeout(() => resolve(this.db.products), 250));
+        // Shuffle a copy of the products each time they are requested
+        const shuffledProducts = Utils.shuffleArray(this.db.products);
+        return new Promise(resolve => setTimeout(() => resolve(shuffledProducts), 250));
     }
 }
 
@@ -173,7 +212,7 @@ class Store {
 
     getFilteredProducts() {
         const { category, searchTerm, sort } = this.state.filters;
-        let filtered = [...this.state.products];
+        let filtered = [...this.state.products]; // Use the (already shuffled on load) product list
 
         if (category !== 'all') {
             filtered = filtered.filter(p => p.category.includes(category));
@@ -198,12 +237,13 @@ class Store {
             case 'name-asc': filtered.sort((a, b) => a.name.localeCompare(b.name)); break;
             case 'name-desc': filtered.sort((a, b) => b.name.localeCompare(a.name)); break;
             case 'rating-desc': filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0)); break;
+            // If sort is 'default', it will use the shuffled order from ApiService
         }
         return filtered;
     }
 
     setProducts(products) {
-        this.state.products = products;
+        this.state.products = products; // Products are already shuffled by ApiService
         this.publish('productsUpdated', this.getFilteredProducts());
     }
 
@@ -271,22 +311,25 @@ class SearchComponent {
         });
 
         document.addEventListener('click', (e) => {
-            if (!this.suggestionsContainer.contains(e.target) && e.target !== this.input) {
+            if (this.suggestionsContainer && !this.suggestionsContainer.contains(e.target) && e.target !== this.input) {
                 this.hideSuggestions();
             }
         });
 
-        this.suggestionsContainer.addEventListener('click', (e) => {
-            const item = e.target.closest('.suggestion-item');
-            if (item && item.dataset.productId) {
-                this.handleSuggestionClick(item.dataset.productId);
-            }
-        });
-
+        if (this.suggestionsContainer) {
+            this.suggestionsContainer.addEventListener('click', (e) => {
+                const item = e.target.closest('.suggestion-item');
+                if (item && item.dataset.productId) {
+                    this.handleSuggestionClick(item.dataset.productId);
+                }
+            });
+        }
+        
         this.form.addEventListener('submit', (e) => e.preventDefault());
     }
 
     showSuggestions(term) {
+        if (!this.suggestionsContainer) return;
         if (term.length < 2) {
             this.hideSuggestions();
             return;
@@ -303,12 +346,14 @@ class SearchComponent {
     }
 
     hideSuggestions() {
-        this.suggestionsContainer.classList.remove('visible');
+        if (this.suggestionsContainer) {
+            this.suggestionsContainer.classList.remove('visible');
+        }
     }
 
     handleSuggestionClick(productId) {
         this.modal.open(productId);
-        this.input.value = '';
+        if (this.input) this.input.value = '';
         this.hideSuggestions();
     }
 
@@ -329,57 +374,110 @@ class ProductSlider {
     constructor(selector, store) {
         this.sliderElement = document.querySelector(selector);
         if (!this.sliderElement) {
-            // console.error(`Slider element not found with selector: ${selector}`); // Silenced for cleaner console
+            // console.warn(`ProductSlider: Element with selector "${selector}" not found.`);
             return;
         }
         
         this.store = store;
         this.sliderKey = this.sliderElement.id.replace('Slider', '');
-        this.track = this.sliderElement; // In current HTML, the ID is directly on the track
+        this.track = this.sliderElement; 
         this.prevBtn = document.getElementById(`${this.sliderKey}Prev`);
         this.nextBtn = document.getElementById(`${this.sliderKey}Next`);
+        
         this.position = 0;
-        this.itemWidth = 280; // Default, will be recalculated
+        this.itemWidth = 280; 
+        this.autoplayDelay = 7000; 
+        this.autoplayIntervalId = null;
+        this.autoplayListenersInitialized = false;
         
         if (this.prevBtn && this.nextBtn) {
-            this.prevBtn.addEventListener('click', () => this.slide(-1));
-            this.nextBtn.addEventListener('click', () => this.slide(1));
-        } else {
-            // console.error(`Navigation buttons not found for slider: ${this.sliderKey}`); // Silenced
+            this.prevBtn.addEventListener('click', () => {
+                this.stopAutoplay();
+                this.slideItems(-1); 
+                this.startAutoplay(); 
+            });
+            this.nextBtn.addEventListener('click', () => {
+                this.stopAutoplay();
+                this.slideItems(1); 
+                this.startAutoplay(); 
+            });
         }
         
         this.store.subscribe('productsUpdated', (products) => this.render(products));
         window.addEventListener('resize', Utils.debounce(() => this.recalculateLayout(), 200));
-        
-        this.recalculateLayout();
     }
 
-    slide(direction) {
-        if (!this.track.children.length) return;
-        
-        const visibleItems = this.getVisibleItemsCount();
-        const totalItems = this.track.children.length;
-        
-        if (totalItems <= visibleItems) { // No sliding if all items are visible
-            this.updateNavButtons(0, totalItems, visibleItems); // Update to disable if needed
-            return;
+    initializeAutoplayListeners() {
+        const sliderInteractionZone = this.sliderElement.closest('.product-slider');
+        if (sliderInteractionZone) {
+            sliderInteractionZone.addEventListener('mouseenter', () => this.stopAutoplay());
+            sliderInteractionZone.addEventListener('mouseleave', () => this.startAutoplay());
+            this.autoplayListenersInitialized = true;
+        } else {
+            if (this.track.parentElement) {
+                 this.track.parentElement.addEventListener('mouseenter', () => this.stopAutoplay());
+                 this.track.parentElement.addEventListener('mouseleave', () => this.startAutoplay());
+                 this.autoplayListenersInitialized = true;
+            }
         }
-        
-        const maxPositionIndex = totalItems - visibleItems;
-        let currentPositionIndex = Math.round(-this.position / this.itemWidth);
+    }
 
-        currentPositionIndex += direction;
-        currentPositionIndex = Math.max(0, Math.min(currentPositionIndex, maxPositionIndex));
-        
-        this.position = -currentPositionIndex * this.itemWidth;
-        this.track.style.transform = `translateX(${this.position}px)`;
-        this.updateNavButtons(currentPositionIndex, totalItems, visibleItems);
+    startAutoplay() {
+        this.stopAutoplay(); 
+        if (!this.track.children.length || this.track.children.length <= this.getVisibleItemsCount()) {
+            return; 
+        }
+        this.autoplayIntervalId = setInterval(() => {
+            this.slideItems(2, true); 
+        }, this.autoplayDelay);
+    }
+
+    stopAutoplay() {
+        if (this.autoplayIntervalId) {
+            clearInterval(this.autoplayIntervalId);
+            this.autoplayIntervalId = null;
+        }
     }
     
+    slideItems(itemsToMove, isAutoplay = false) {
+        if (!this.track.children.length || this.itemWidth === 0) return;
+    
+        const visibleItems = this.getVisibleItemsCount();
+        const totalItems = this.track.children.length;
+    
+        if (totalItems <= visibleItems) {
+            this.position = 0; 
+            this.track.style.transform = `translateX(${this.position}px)`;
+            this.updateNavButtons(0, totalItems, visibleItems);
+            this.stopAutoplay(); 
+            return;
+        }
+    
+        const maxLogicalIndex = totalItems - visibleItems;
+        let currentLogicalIndex = Math.round(-this.position / this.itemWidth);
+        let nextLogicalIndex = currentLogicalIndex + itemsToMove;
+    
+        if (isAutoplay) {
+            if (itemsToMove > 0) { 
+                if (currentLogicalIndex >= maxLogicalIndex || nextLogicalIndex > maxLogicalIndex) {
+                    nextLogicalIndex = 0; 
+                }
+            }
+        } else { 
+            nextLogicalIndex = Math.max(0, Math.min(nextLogicalIndex, maxLogicalIndex));
+        }
+        
+        nextLogicalIndex = Math.max(0, Math.min(nextLogicalIndex, maxLogicalIndex < 0 ? 0 : maxLogicalIndex ));
+
+        this.position = -nextLogicalIndex * this.itemWidth;
+        this.track.style.transform = `translateX(${this.position}px)`;
+        this.updateNavButtons(nextLogicalIndex, totalItems, visibleItems);
+    }
+
     updateNavButtons(currentPositionIndex, totalItems, visibleItems) {
         if (!this.prevBtn || !this.nextBtn) return;
 
-        if (totalItems <= visibleItems) { // If all items are visible or fewer
+        if (totalItems <= visibleItems) { 
             this.prevBtn.disabled = true;
             this.nextBtn.disabled = true;
             return;
@@ -388,29 +486,37 @@ class ProductSlider {
         this.nextBtn.disabled = currentPositionIndex >= totalItems - visibleItems;
     }
 
-
     recalculateLayout() {
-        if (!this.track || !this.track.children.length || !this.track.parentElement) return;
+        if (!this.track || !this.track.parentElement) return;
         
         this.position = 0;
         this.track.style.transform = 'translateX(0px)';
+        
         const firstCard = this.track.querySelector('.product-card');
         
         if (firstCard) {
-            const cardStyle = window.getComputedStyle(firstCard);
-            const cardMargin = parseFloat(cardStyle.marginRight) || 0; // Assuming gap is used, marginRight might be 0
-            const gap = parseFloat(window.getComputedStyle(this.track).gap) || 20; // Use actual gap
+            const gapStyle = window.getComputedStyle(this.track).gap;
+            const gap = gapStyle && gapStyle !== 'normal' ? parseFloat(gapStyle) : 20; 
             this.itemWidth = firstCard.offsetWidth + gap;
+        } else {
+            this.itemWidth = 280; 
         }
+        if (this.itemWidth === 0 && this.track.children.length > 0) {
+            this.itemWidth = 280; 
+        }
+
         const visibleItems = this.getVisibleItemsCount();
         const totalItems = this.track.children.length;
-        this.updateNavButtons(0, totalItems, visibleItems); // Update navs on resize
+        this.updateNavButtons(0, totalItems, visibleItems); 
+        
+        this.stopAutoplay(); 
+        this.startAutoplay(); 
     }
 
     getVisibleItemsCount() {
-        if (!this.sliderElement.parentElement || this.itemWidth === 0) return 1;
+        if (!this.sliderElement.parentElement || this.itemWidth === 0) return 1; 
         const containerWidth = this.sliderElement.parentElement.offsetWidth;
-        return Math.floor(containerWidth / this.itemWidth);
+        return Math.max(1, Math.floor(containerWidth / this.itemWidth)); 
     }
 
     createProductCardHTML(product) {
@@ -440,6 +546,7 @@ class ProductSlider {
 
     render(allProducts) {
         if (!this.track) return;
+        this.stopAutoplay(); 
         
         const productsForThisSlider = allProducts.filter(p => p.slider === this.sliderKey);
         if (productsForThisSlider.length > 0) {
@@ -447,7 +554,12 @@ class ProductSlider {
         } else {
             this.track.innerHTML = `<p class="empty-slider-message">No hay productos en esta sección.</p>`;
         }
-        this.recalculateLayout(); // Recalculate after rendering
+        this.recalculateLayout(); 
+
+        if (!this.autoplayListenersInitialized) {
+            this.initializeAutoplayListeners();
+        }
+        this.startAutoplay();
     }
 }
 
@@ -529,14 +641,11 @@ class ModalComponent {
         this.overlay = document.getElementById('productModalOverlay');
         
         if (!this.overlay) {
-            // console.error('Modal overlay not found'); // Silenced
             return;
         }
         
-        // These elements are dynamically rendered, so we'll query them inside render() or event handlers
         this.content = null; 
-        this.closeBtn = null;
-        this.currentProduct = null; // Store the product for actions
+        this.currentProduct = null;
         
         this.overlay.addEventListener('click', (e) => { 
             if (e.target === this.overlay && this.isOpen()) this.close(); 
@@ -546,14 +655,13 @@ class ModalComponent {
             if (e.key === 'Escape' && this.isOpen()) this.close(); 
         });
 
-        // Delegated event listener for modal content
         this.overlay.addEventListener('click', (e) => {
-            if (!this.currentProduct) return; // Modal not fully open or product not set
+            if (!this.currentProduct || !this.content || !this.content.contains(e.target)) return; 
 
             const addToCartBtn = e.target.closest('[data-modal-action="addToCart"]');
             const decreaseQtyBtn = e.target.closest('[data-modal-action="decreaseQty"]');
             const increaseQtyBtn = e.target.closest('[data-modal-action="increaseQty"]');
-            const closeModalBtn = e.target.closest('.modal-close-btn'); // Re-select close button if inside modal
+            const closeModalBtn = e.target.closest('.modal-close-btn'); 
             const thumbnailBtn = e.target.closest('.modal-thumbnail button');
 
             if (addToCartBtn) this.handleAddToCart();
@@ -562,7 +670,9 @@ class ModalComponent {
             else if (closeModalBtn) this.close();
             else if (thumbnailBtn) {
                  const mainImg = this.overlay.querySelector('#modalMainImg');
-                 if (mainImg) mainImg.src = this.currentProduct.images[thumbnailBtn.dataset.index];
+                 if (mainImg && this.currentProduct.images[thumbnailBtn.dataset.index]) {
+                     mainImg.src = this.currentProduct.images[thumbnailBtn.dataset.index];
+                 }
                  this.overlay.querySelectorAll('.modal-thumbnail button').forEach(t => t.classList.remove('active'));
                  thumbnailBtn.classList.add('active');
             }
@@ -578,13 +688,13 @@ class ModalComponent {
         const product = this.store.getProductById(productId);
         if (!product) return console.error(`Product with ID ${productId} not found.`);
         
-        this.currentProduct = product; // Store for actions
-        this.render(product); // This will create this.content and this.closeBtn
+        this.currentProduct = product; 
+        this.render(product); 
 
         document.body.style.overflow = 'hidden';
-        this.overlay.style.display = 'flex'; // Make it part of layout before animating
+        this.overlay.style.display = 'flex'; 
         
-        requestAnimationFrame(() => { // Ensure display:flex is applied
+        requestAnimationFrame(() => { 
             this.overlay.classList.add('visible');
             if(this.content) this.content.classList.add('animated', 'zoomIn', 'faster');
         });
@@ -599,12 +709,17 @@ class ModalComponent {
         const onAnimationEnd = () => {
             document.body.style.overflow = '';
             if (this.content) this.content.classList.remove('animated', 'zoomOut', 'faster');
-            this.overlay.style.display = 'none'; // Hide after animation
-            this.currentProduct = null;
-            if (this.content) this.content.removeEventListener('animationend', onAnimationEnd);
-            this.content = null; // Clear content reference
+            this.overlay.style.display = 'none'; 
+            this.currentProduct = null; 
+            this.overlay.innerHTML = ''; 
+            this.content = null; 
         };
-        this.content.addEventListener('animationend', onAnimationEnd, { once: true });
+        const animationFallbackTimeout = setTimeout(onAnimationEnd, 300); 
+        
+        this.content.addEventListener('animationend', () => {
+            clearTimeout(animationFallbackTimeout);
+            onAnimationEnd();
+        }, { once: true });
     }
 
     handleAddToCart() {
@@ -634,7 +749,7 @@ class ModalComponent {
             : `<div class="modal-stock out-of-stock">Agotado</div>`;
         
         let thumbnailsHTML = '';
-        if (product.images.length > 1) {
+        if (product.images && product.images.length > 1) {
             thumbnailsHTML = product.images.map((img, index) => `
                 <div class="modal-thumbnail">
                     <button ${index === 0 ? 'class="active"' : ''} data-index="${index}" aria-label="Ver imagen ${index + 1}">
@@ -644,15 +759,14 @@ class ModalComponent {
             `).join('');
         }
         
-        // Ensure overlay innerHTML is set with the new modal content structure
         this.overlay.innerHTML = `
             <div class="modal-content"> 
                 <button class="modal-close-btn" aria-label="Cerrar modal"><i class="fas fa-times"></i></button>
                 <div class="modal-left">
                   <div class="modal-main-img-container">
-                    <img id="modalMainImg" src="${product.images[0] || 'imagenes/placeholder.png'}" alt="Imagen principal del producto ${product.name}" /> 
+                    <img id="modalMainImg" src="${(product.images && product.images[0]) || 'imagenes/placeholder.png'}" alt="Imagen principal del producto ${product.name}" /> 
                   </div>
-                  ${product.images.length > 1 ? `<div id="modalThumbnails" class="modal-thumbnails">${thumbnailsHTML}</div>` : ''}
+                  ${(product.images && product.images.length > 1) ? `<div id="modalThumbnails" class="modal-thumbnails">${thumbnailsHTML}</div>` : ''}
                 </div>
                 <div class="modal-right">
                   <h2 id="modalTitle" class="modal-title">${product.name}</h2>
@@ -683,10 +797,7 @@ class ModalComponent {
                   </div>
                 </div>
             </div>`;
-
-        // After rendering, get references to the newly created elements
         this.content = this.overlay.querySelector('.modal-content');
-        // this.closeBtn = this.overlay.querySelector('.modal-close-btn'); // Listener is now delegated on overlay
     }
 }
 
@@ -695,7 +806,6 @@ class NotificationComponent {
     constructor(store) {
         this.container = document.getElementById('notification-container');
         if (!this.container) {
-            // console.error('Notification container not found'); // Silenced
             return;
         }
         store.subscribe('notification', (data) => this.show(data.message));
@@ -707,7 +817,7 @@ class NotificationComponent {
         el.className = 'notification';
         el.textContent = message;
         this.container.appendChild(el);
-        requestAnimationFrame(() => el.classList.add('visible')); // Ensures transition happens
+        requestAnimationFrame(() => el.classList.add('visible')); 
         setTimeout(() => {
             el.classList.remove('visible');
             el.addEventListener('transitionend', () => el.remove(), { once: true });
@@ -715,30 +825,28 @@ class NotificationComponent {
     }
 }
 
-// NEW: Promo Carousel Component
 class PromoCarousel {
     constructor(selector) {
         this.carousel = document.getElementById(selector);
         if (!this.carousel) {
-            // console.warn(`Promo carousel with selector #${selector} not found.`);
             return;
         }
 
         this.inner = this.carousel.querySelector('.promo-carousel-inner');
-        this.slides = Array.from(this.inner.querySelectorAll('.promo-carousel-slide'));
+        this.slides = this.inner ? Array.from(this.inner.querySelectorAll('.promo-carousel-slide')) : [];
         this.prevButton = this.carousel.querySelector('.carousel-prev');
         this.nextButton = this.carousel.querySelector('.carousel-next');
         this.dotsContainer = this.carousel.querySelector('.carousel-dots');
 
         if (!this.inner || this.slides.length === 0 || !this.prevButton || !this.nextButton || !this.dotsContainer) {
-            console.error('Promo carousel is missing required inner elements (inner, slides, prev/next buttons, or dots container).');
+            // console.error('PromoCarousel: Missing required inner elements.');
             return;
         }
 
         this.currentIndex = 0;
         this.totalSlides = this.slides.length;
-        // this.autoplayInterval = null;
-        // this.autoplayDelay = 5000; // 5 seconds
+        this.autoplayInterval = null;
+        this.autoplayDelay = 5000; 
 
         this.init();
     }
@@ -747,11 +855,11 @@ class PromoCarousel {
         this.createDots();
         this.updateCarousel();
         this.addEventListeners();
-        // this.startAutoplay(); // Uncomment to enable autoplay
+        this.startAutoplay(); 
     }
 
     createDots() {
-        this.dotsContainer.innerHTML = ''; // Clear existing dots
+        this.dotsContainer.innerHTML = ''; 
         this.slides.forEach((_, index) => {
             const dot = document.createElement('button');
             dot.setAttribute('role', 'tab');
@@ -789,8 +897,13 @@ class PromoCarousel {
             });
         }
         
-        this.prevButton.disabled = this.currentIndex === 0;
-        this.nextButton.disabled = this.currentIndex === this.totalSlides - 1;
+        if (this.totalSlides > 0) {
+            this.prevButton.disabled = this.currentIndex === 0;
+            this.nextButton.disabled = this.currentIndex === this.totalSlides - 1;
+        } else { 
+            this.prevButton.disabled = true;
+            this.nextButton.disabled = true;
+        }
     }
 
     goToSlide(index) {
@@ -798,59 +911,54 @@ class PromoCarousel {
         this.updateCarousel();
     }
 
-    next() {
-        if (this.currentIndex < this.totalSlides - 1) {
-            this.currentIndex++;
-            this.updateCarousel();
-        }
+    next() { 
+        const nextIndex = (this.currentIndex + 1) % this.totalSlides;
+        this.goToSlide(nextIndex);
     }
 
-    prev() {
-        if (this.currentIndex > 0) {
-            this.currentIndex--;
-            this.updateCarousel();
-        }
+    prev() { 
+        const prevIndex = (this.currentIndex - 1 + this.totalSlides) % this.totalSlides;
+        this.goToSlide(prevIndex);
     }
     
-    // --- Autoplay functionality (optional) ---
-    // startAutoplay() {
-    //     this.stopAutoplay(); // Clear existing interval if any
-    //     this.autoplayInterval = setInterval(() => {
-    //         this.next();
-    //         if (this.currentIndex === this.totalSlides - 1) { // Loop back to start
-    //             this.currentIndex = -1; // So next() will go to 0
-    //         }
-    //     }, this.autoplayDelay);
-    // }
+    startAutoplay() {
+        this.stopAutoplay(); 
+        if (this.totalSlides <= 1) return; 
 
-    // stopAutoplay() {
-    //     clearInterval(this.autoplayInterval);
-    // }
+        this.autoplayInterval = setInterval(() => {
+            const nextIndex = (this.currentIndex + 1) % this.totalSlides; 
+            this.goToSlide(nextIndex);
+        }, this.autoplayDelay);
+    }
+
+    stopAutoplay() {
+        clearInterval(this.autoplayInterval);
+        this.autoplayInterval = null;
+    }
 
     addEventListeners() {
         this.prevButton.addEventListener('click', () => {
-            this.prev();
-            // this.stopAutoplay(); // Optional: Stop autoplay on manual interaction
-            // this.startAutoplay(); // Optional: Restart autoplay timer
+            this.prev(); 
+            this.stopAutoplay(); 
+            this.startAutoplay(); 
         });
         this.nextButton.addEventListener('click', () => {
-            this.next();
-            // this.stopAutoplay();
-            // this.startAutoplay();
+            this.next(); 
+            this.stopAutoplay();
+            this.startAutoplay();
         });
 
         if (this.dots && this.dots.length > 0) {
             this.dots.forEach(dot => {
                 dot.addEventListener('click', (e) => {
                     this.goToSlide(parseInt(e.target.dataset.slideTo));
-                    // this.stopAutoplay();
-                    // this.startAutoplay();
+                    this.stopAutoplay();
+                    this.startAutoplay();
                 });
             });
         }
-        // Optional: Pause autoplay on hover
-        // this.carousel.addEventListener('mouseenter', () => this.stopAutoplay());
-        // this.carousel.addEventListener('mouseleave', () => this.startAutoplay());
+        this.carousel.addEventListener('mouseenter', () => this.stopAutoplay());
+        this.carousel.addEventListener('mouseleave', () => this.startAutoplay());
     }
 }
 
@@ -865,9 +973,9 @@ class App {
     }
 
     initComponents() {
-        this.modal = new ModalComponent(this.store); // Ensure modal is initialized before search
+        this.modal = new ModalComponent(this.store); 
         this.search = new SearchComponent(this.store, this.modal);
-        this.promoCarousel = new PromoCarousel('promo-carousel'); // Initialize Promo Carousel
+        this.promoCarousel = new PromoCarousel('promo-carousel'); 
         this.sliders = {
             accesorios: new ProductSlider('#accesoriosSlider', this.store),
             ofertas: new ProductSlider('#ofertasSlider', this.store)
@@ -879,7 +987,7 @@ class App {
     initEventListeners() {
         const categoryNav = document.getElementById('category-nav-buttons');
         const sortOptions = document.getElementById('sortOptions');
-        const mainContent = document.querySelector('main'); // Changed from body to main for specificity
+        const mainContent = document.querySelector('main'); 
 
         if (categoryNav) {
             categoryNav.addEventListener('click', (e) => {
@@ -905,7 +1013,7 @@ class App {
                 
                 const action = button.dataset.action;
                 const card = button.closest('.product-card');
-                if (!card || !card.dataset.productId) return; // Ensure card and productId exist
+                if (!card || !card.dataset.productId) return; 
                 
                 const productId = card.dataset.productId;
                 if (action === 'openModal') { 
@@ -923,15 +1031,14 @@ class App {
     async initApp() {
         const loader = document.getElementById('global-loader');
         try {
-            const products = await this.api.getProducts();
-            this.store.setProducts(products); // This will trigger rendering of product sliders
+            const products = await this.api.getProducts(); // Products are now shuffled here
+            this.store.setProducts(products); 
         } catch (error) {
             console.error('Failed to initialize the app:', error);
             if(this.store) this.store.publish('notification', { message: 'Error al cargar los productos.' });
         } finally {
             if (loader) {
                 loader.style.opacity = '0';
-                // Use 'transitionend' for smoother removal after fade out
                 loader.addEventListener('transitionend', () => loader.remove(), { once: true });
             }
         }
